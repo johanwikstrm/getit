@@ -1,14 +1,16 @@
 package main
 
 import (
-	"code.google.com/p/go.net/websocket"
-	urlshortener "code.google.com/p/google-api-go-client/urlshortener/v1"
 	"fmt"
 	"math/rand"
 	"net/http"
+
 	"strconv"
 	"strings"
 	"sync"
+
+	"code.google.com/p/go.net/websocket"
+	urlshortener "code.google.com/p/google-api-go-client/urlshortener/v1"
 )
 
 func htmlHandler(local bool, sessions map[string]*session) func(w http.ResponseWriter, r *http.Request) {
@@ -19,6 +21,7 @@ func htmlHandler(local bool, sessions map[string]*session) func(w http.ResponseW
 			sessId := strconv.Itoa(rand.Int())
 			votes := make(map[string]vote)
 			// TODO: generate a short url
+			//TODO make http client that loads and send the secret key
 			longurl := "http://" + BASEURL + "/" + sessId + "/student"
 			shorturl := "[short url]"
 			if !local {

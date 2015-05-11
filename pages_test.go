@@ -1,9 +1,6 @@
 package main
 
-import (
-	"net/http"
-	"testing"
-)
+import "testing"
 
 func TestStudentPage(t *testing.T) {
 

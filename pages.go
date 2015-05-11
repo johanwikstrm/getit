@@ -46,13 +46,13 @@ func serveUrlPage(w http.ResponseWriter, r *http.Request, sessId string, sess *s
 	urlpage := UrlPage{}
 	urlpage.StudentUrl = sess.shorturl
 	urlpage.TeacherUrl = BASEURL + "/" + sessId + "/teacher"
-	executePageTemplate("gui/url.html.go", &urlpage, w)
+	executePageTemplate("gui/url.go.html", &urlpage, w)
 }
 
 // if no query parameters, this is a new student, else, this is an old student
 func serveStudentPage(w http.ResponseWriter, r *http.Request, sessId string, sess *session) {
 	timeUntilExpiry := VOTELIFELENGTH
-	tmpl, err := template.ParseFiles("gui/student.html.go")
+	tmpl, err := template.ParseFiles("gui/student.go.html")
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -95,7 +95,7 @@ func serveStudentPage(w http.ResponseWriter, r *http.Request, sessId string, ses
 func serveTeacherPage(w http.ResponseWriter, r *http.Request, sessId string, sess *session) {
 	teacherpage := TeacherPage{}
 	teacherpage.SuperShortUrl = strings.TrimPrefix(sess.shorturl, "http://")
-	executePageTemplate("gui/teacher.html.go", &teacherpage, w)
+	executePageTemplate("gui/teacher.go.html", &teacherpage, w)
 }
 
 func serveWrongSessionIdPage(w http.ResponseWriter, r *http.Request) {
